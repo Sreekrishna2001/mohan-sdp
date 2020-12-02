@@ -13,8 +13,7 @@
 
       </div>
 
-      <button class="button is-primary has-text-white" routerLink="/new-list">+ New Restaurant</button>
-
+      <div *ngIf="adminstatus"><button class="button is-primary has-text-white" routerLink="/new-list">+ New Restaurant</button></div>
     </div>
 
     <div class="task-list-container has-background-light">
@@ -39,7 +38,7 @@
                 <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
                   Delete
                 </a>
-                <a [routerLink]="['/login']" class="dropdown-item" >
+                <a (click)="logout()" class="dropdown-item" >
                   Log out
                 </a>
               </div>
@@ -50,11 +49,12 @@
         <!-- Task Elements -->
         <div class="task" *ngFor="let task of tasks" (click)="onTaskClick(task)" [ngClass]="{ 'completed': task.completed }">
           <div class="task-text">
+           
             <p>{{ task.title }}</p>
           </div>
           <div class="task-buttons">
 
-            <button class="button" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
+           <!--  <button class="button" [routerLink]="['/lists', selectedListId, 'edit-task', task._id]">
               <div class="icon">
                 <i class="fas fa-edit"></i>
               </div>
@@ -64,7 +64,7 @@
               <div class="icon">
                 <i class="fas fa-trash"></i>
               </div>
-            </button>
+            </button> -->
 
           </div>
         </div>

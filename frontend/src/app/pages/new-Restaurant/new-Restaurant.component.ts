@@ -5,10 +5,10 @@ import { List } from 'src/app/models/list.model';
 
 @Component({
   selector: 'app-new-list',
-  templateUrl: './new-list.component.html',
-  styleUrls: ['./new-list.component.scss']
+  templateUrl: './new-Restaurant.component.html',
+  styleUrls: ['./new-Restaurant.component.scss']
 })
-export class NewListComponent implements OnInit {
+export class NewRestaurantComponent implements OnInit {
 
   constructor(private taskService: TaskService, private router: Router) { }
 

@@ -117,7 +117,7 @@ let verifySession = (req, res, next) => {
 app.get('/lists', authenticate, (req, res) => {
     // We want to return an array of all the lists that belong to the authenticated user 
     List.find({
-        _userId: req.user_id
+        
     }).then((lists) => {
         res.send(lists);
     }).catch((e) => {
@@ -165,7 +165,7 @@ app.delete('/lists/:id', authenticate, (req, res) => {
     // We want to delete the specified list (document with id in the URL)
     List.findOneAndRemove({
         _id: req.params.id,
-        _userId: req.user_id
+        
     }).then((removedListDoc) => {
         res.send(removedListDoc);
 
@@ -197,8 +197,7 @@ app.post('/lists/:listId/tasks', authenticate, (req, res) => {
     // We want to create a new task in a list specified by listId
 
     List.findOne({
-        _id: req.params.listId,
-        _userId: req.user_id
+        _id: req.params.listId
     }).then((list) => {
         if (list) {
             // list object with the specified conditions was found
@@ -348,10 +347,19 @@ app.post('/users/login', (req, res) => {
             });
         }).then((authTokens) => {
             // Now we construct and send the response to the user with their auth tokens in the header and the user object in the body
-            res
+           /*  if(email=="maremandasreekrishna@gmail.com"){
+                let adminStatus=true
+                let admin=[...User]
+                res
+                .header('x-refresh-token', authTokens.refreshToken)
+                .header('x-access-token', authTokens.accessToken)
+                .send(admin);
+            } */
+           res
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)
                 .send(user);
+           
         })
     }).catch((e) => {
         res.status(400).send(e);
@@ -371,6 +379,12 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     });
 })
+
+// app.put('/updateuser/:id',(req,res) => {
+//     User.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+//     .then(resp => {res.send(resp)})
+//     .catch(err => console.log(err));
+// })
 
 
 

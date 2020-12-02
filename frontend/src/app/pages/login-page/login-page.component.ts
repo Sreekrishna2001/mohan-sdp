@@ -9,16 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.authService.adminstatus=false;
   }
 
   onLoginButtonClicked(email: string, password: string) {
     this.authService.login(email, password).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
+        localStorage.setItem('adminstatus',res.body.adminstatus);
         this.router.navigate(['/lists']);
       }
       console.log(res);

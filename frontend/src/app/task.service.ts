@@ -38,7 +38,8 @@ export class TaskService {
   }
 
   getTasks(listId: string) {
-    return this.webReqService.get(`lists/${listId}/tasks`);
+    let res= this.webReqService.get(`lists/${listId}/tasks`);
+    return res;
   }
 
   createTask(title: string, listId: string) {

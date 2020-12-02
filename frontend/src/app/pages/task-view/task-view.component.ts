@@ -3,6 +3,7 @@ import { TaskService } from 'src/app/task.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { List } from 'src/app/models/list.model';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-task-view',
@@ -13,12 +14,25 @@ export class TaskViewComponent implements OnInit {
 
   lists: List[];
   tasks: Task[];
+  con=false;
 
   selectedListId: string;
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
+   public adminstatus=false;
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router,
+    private auth: AuthService) { }
 
   ngOnInit() {
+    let adminstatus=localStorage.getItem('adminstatus');
+    if(adminstatus=="true")
+    {
+      this.adminstatus=true;
+    }
+    else
+    {
+      this.adminstatus=false;
+    }
+    console.log(this.adminstatus);
     this.route.params.subscribe(
       (params: Params) => {
         if (params.listId) {
@@ -59,5 +73,14 @@ export class TaskViewComponent implements OnInit {
       this.tasks = this.tasks.filter(val => val._id !== id);
       console.log(res);
     })
+  }
+
+  logout()
+  {
+    localStorage.removeItem('user-id');
+    localStorage.removeItem('x-access-token');
+    localStorage.removeItem('x-refresh-token');
+    localStorage.removeItem('adminstatus');
+    this.router.navigate(['/login']);
   }
 }

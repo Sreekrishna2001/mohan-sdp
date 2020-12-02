@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NewListComponent } from './pages/new-list/new-list.component';
+import { NewRestaurantComponent } from './pages/new-Restaurant/new-Restaurant.component';
 import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { WebReqInterceptor } from './web-req.interceptor';
@@ -18,7 +18,7 @@ import { EditTaskComponent } from './pages/edit-task/edit-task.component';
   declarations: [
     AppComponent,
     TaskViewComponent,
-    NewListComponent,
+    NewRestaurantComponent,
     NewTaskComponent,
     LoginPageComponent,
     SignupPageComponent,

@@ -10,6 +10,7 @@ import { shareReplay, tap } from 'rxjs/operators';
 })
 export class AuthService {
 
+  adminstatus=false;
   constructor(private webService: WebRequestService, private router: Router, private http: HttpClient) { }
 
   login(email: string, password: string) {
@@ -18,6 +19,8 @@ export class AuthService {
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log(res);
+        
         console.log("LOGGED IN!");
       })
     )
@@ -63,12 +66,14 @@ export class AuthService {
     localStorage.setItem('user-id', userId);
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
+    
   }
 
   private removeSession() {
     localStorage.removeItem('user-id');
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token');
+    localStorage.removeItem('adminstatus');
   }
 
   getNewAccessToken() {
