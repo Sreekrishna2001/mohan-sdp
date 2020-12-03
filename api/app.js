@@ -222,6 +222,7 @@ app.post('/lists/:listId/tasks', authenticate, (req, res) => {
     })
 })
 
+
 /**
  * PATCH /lists/:listId/tasks/:taskId
  * Purpose: Update an existing task
@@ -393,7 +394,7 @@ let deleteTasksFromList = (_listId) => {
     Task.deleteMany({
         _listId
     }).then(() => {
-        console.log("Tasks from " + _listId + " were deleted!");
+        console.log("Review from " + _listId + " were deleted!");
     })
 }
 
